@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun crear() {
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+            val shortcut = ShortcutInfoCompat.Builder(this, "quickAccess")
+                .setShortLabel(getString(R.string.name_long))
+                .setLongLabel(getString(R.string.name_long))
+                .setIcon(IconCompat.createWithResource(this, R.drawable.ic_launcher_foreground))
+                .setIntent(Intent(Intent.ACTION_VIEW))
+                .build()
+            ShortcutManagerCompat.pushDynamicShortcut(this, shortcut)
+        }
     }
 }
